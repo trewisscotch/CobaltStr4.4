@@ -1,5 +1,10 @@
 # COBALT STRIKE 4.4
 
+<p align="center">
+    <img src="https://github.com/trewisscotch/CobaltStr4.4/blob/main/cobaltstrike4.4/138226901-a53c95e3-f145-498e-95cd-6a195e9f7354.png" alt="Image"  />
+</p>
+
+
 ### Cobalt Strike is a commercial, full-featured, remote access tool that bills itself as "adversary simulation software designed to execute targeted attacks and emulate the post-exploitation actions of advanced threat actors". Cobalt Strike’s interactive post-exploit capabilities cover the full range of ATT&amp;CK tactics, all executed within a single, integrated system.
 
 ## Cobalt Strike 4.4 (August 04, 2021)
