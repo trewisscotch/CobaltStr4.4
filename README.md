@@ -13,7 +13,7 @@
 ## Distribution Packages (released with Cobalt Strike 4.4)
 5adf9d086a2f59be9095458f207de9e947a05696e63365a4da02acdc17caa130 Cobalt Strike MacOSX Distribution Package (20210804) 8331a77fb2f81ce969795466f8f441f02813789c24b47d0771ffdceddf8d91fe Cobalt Strike Linux Distributions Package (20210804) fdcc265fcf1d87bdfd0f7ea91138d7d9f8128f8ed157d427317619002aadd17d Cobalt Strike Windows Distribution Package (20210804)
 ## LAUNCH
-* First you will have to unpack cobaltstrike.7z (https://github.com/)
+* First you will have to unpack cobaltstrike.7z 
 * ./teamserver "ip_address" "password" 
   
   * IP Address - (mandatory) Enter the externally reachable IP address of the team server. Cobalt Strike uses this value as a default host for its features.
