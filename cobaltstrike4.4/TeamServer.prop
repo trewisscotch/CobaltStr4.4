@@ -1,0 +1,30 @@
+#Cobalt Strike Team Server Properties
+#Fri May 07 12:00:00 CDT 2021
+# ------------------------------------------------
+# Validation for screenshot messages from beacons
+# ------------------------------------------------
+# limits.screenshot_validated=true
+# limits.screenshot_data_maxlen=4194304
+# limits.screenshot_user_maxlen=1024
+# limits.screenshot_title_maxlen=1024
+# Stop writing screenshot data when Disk Usage reaches XX%
+# Example: Off
+#          "limits.screenshot_diskused_percent=0"
+# Example: Stop writing screenshot data when Disk Usage reaches 95%
+#          "limits.screenshot_diskused_percent=95"
+# Default:
+# limits.screenshot_diskused_percent=95
+# ------------------------------------------------
+# Validation for keystroke messages from beacons
+# ------------------------------------------------
+# limits.keystrokes_validated=true
+# limits.keystrokes_data_maxlen=8192
+# limits.keystrokes_user_maxlen=1024
+# limits.keystrokes_title_maxlen=1024
+# Stop writing keystroke data when Disk Usage reaches XX%
+# Example: Off
+#          "limits.keystrokes_diskused_percent=0"
+# Example: Stop writing keystroke data when Disk Usage reaches 95%
+#          "limits.keystrokes_diskused_percent=95"
+# Default:
+# limits.keystrokes_diskused_percent=95

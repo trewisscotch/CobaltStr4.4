@@ -1,0 +1,2 @@
+#!/bin/bash
+java -XX:ParallelGCThreads=4 -XX:+UseParallelGC -javaagent:hook.jar -classpath ./cobaltstrike.jar pe.PEParser $*
